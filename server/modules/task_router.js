@@ -18,6 +18,7 @@ taskRouter.get('/', (req, res) => {
 });
 
 // Route to allow the client to add a new task to the DB
+// Name and Status cannot be null
 taskRouter.post('/', (req, res) => {
     console.log('hello from /tasks POST');
     
@@ -51,6 +52,18 @@ taskRouter.post('/', (req, res) => {
     });
 });
 
-    
+// Route to allow the client to update the status of a task in the DB
+taskRouter.put('/:id', (req, res) => {
+    console.log('hello from /tasks PUT');
+
+
+});
+
+// Route to allow the client to delete a task from the DB
+taskRouter.delete('/:id', (req, res) => {
+    console.log('hello from /tasks DELETE');
+
+
+});
 
 module.exports = taskRouter;
