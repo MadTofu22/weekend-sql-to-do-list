@@ -14,11 +14,11 @@
 
 ### Index.html
 
-[ ] Input fields:
-- [ ] Task Name
-- [ ] Task Description
-- [ ] Task State (New | In-progress | Complete | Overdue)
-- [ ] Due Date
+[X] Input fields:
+- [X] Task Name
+- [X] Task Description
+- [X] Task State (New | In-progress | Complete | Overdue)
+- [X] Due Date
 [ ] Add Task button
 [ ] Task View section
 - [ ] Display task name
@@ -39,8 +39,8 @@
 
 ### Server/Router
 
-[ ] Add route from server to router
-[ ] GET route to get all store tasks from DB
+[X] Add route from server to router
+[X] GET route to get all store tasks from DB
 [ ] POST route to add new task DB
 [ ] PUT route to update a task in DB
 [ ] DELETE route to remove a task from the DB

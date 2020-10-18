@@ -3,7 +3,7 @@ const pg = require('pg');
 // Setup PG to connect to DB
 const Pool = pg.Pool;
 const pool = new Pool ({
-    database: '', 
+    database: 't2w3_challenge', 
     host: 'localhost', 
     port: 5432, 
     max: 10, 

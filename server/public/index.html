@@ -12,5 +12,34 @@
     <header>
         <h1>Welcome to MadTofu's To-Do Web App!</h1>
     </header>
+    <main>
+        <div id="createTask">
+            <h3>Create a new task!</h3>
+            <table id="inputTable">
+                <thead>
+                    <th><label for="nameInput">Task Name:</label></th>
+                    <th><label for="descriptionInput">Description:</label></th>
+                    <th><label for="stateInput">Status:</label></th>
+                    <th><label for="dueInput">Due Date:</label></th>
+                    <th><label for="addTask"></label></th>
+                </thead>
+                <tbody>
+                    <td><input type="text" name="nameInput" id="nameInput" class="inputField" placeholder="name"></td>
+                    <td><input type="text" name="descriptionInput" id="descriptionInput" class="inputField" placeholder="description"></td>
+                    <td><select name="stateInput" class="inputField" id="stateInput">
+                        <option value="New">New</option>
+                        <option value="In-progress">In-progress</option>
+                        <option value="Complete">Complete</option>
+                        <option value="Over Due">Over Due</option>
+                    </select></td>
+                    <td><input type="date" name="dueInput" id="dueInput" class="inputField"></td>
+                    <td><button class="submitButton" id="addTask">Add Task</button></td>
+                </tbody>
+            </table>
+        </div>
+        <section id="tasks">
+            <!-- Tasks will be populated in this section. -->
+        </section>
+    </main>
 </body>
 </html>
