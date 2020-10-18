@@ -1,6 +1,6 @@
 const express = require('express');
 const taskRouter = express.Router();
-const pool = require('../modules/pool');
+const pool = require('./pool');
 
 // Route to allow the client to retrieve the tasks stored in the DB
 taskRouter.get('/', (req, res) => {
@@ -22,6 +22,7 @@ taskRouter.get('/', (req, res) => {
 taskRouter.post('/', (req, res) => {
     console.log('hello from /tasks POST');
     
+    // Get the user input from the client request
     let name = req.body.name;
     let description = req.body.description;
     let status = req.body.status;
@@ -29,20 +30,23 @@ taskRouter.post('/', (req, res) => {
     let queryText = ``;
     let queryParams = [];
 
-    if (!due && !description) { // This means there is no due date and no description
+    // Check which inputs were left blank to set the query text and parameters 
+    if (due == '' && description == '') { // This means there is no due date and no description
         queryText += `INSERT INTO "tasks" ("name", "status") VALUES ($1, $2);`;
         queryParams = [name, status];
-    } else if (!due) { // This means there is no due date set
+    } else if (due == '') { // This means there is no due date set
         queryText += `INSERT INTO "tasks" ("name", "description", "status") VALUES ($1, $2, $3);`;
         queryParams = [name, description, status];
-    } else if (!description) { // This means there is no description set
+    } else if (description == '') { // This means there is no description set
         queryText += `INSERT INTO "tasks" ("name", "status", "due") VALUES ($1, $2, $3);`;
         queryParams = [name, status, due];
     } else { // This means all info is present
         queryText += `INSERT INTO "tasks" ("name", "description", "status", "due") VALUES ($1, $2, $3, $4);`;
         queryParams = [name, description, status, due];
     }
+    console.log('queryText:', queryText, '; queryParamas:', queryParams);
 
+    // Send request to the DB
     pool.query(queryText, queryParams).then(result => {
         console.log('result from /tasks POST', result);
         res.sendStatus(200);

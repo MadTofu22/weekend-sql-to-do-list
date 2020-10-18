@@ -19,7 +19,7 @@
 - [X] Task Description
 - [X] Task State (New | In-progress | Complete | Overdue)
 - [X] Due Date
-[ ] Add Task button
+[X] Add Task button
 [ ] Task View section
 - [ ] Display task name
 - [ ] Display task state
@@ -30,7 +30,7 @@
 
 ### Styles.css
 
-[ ] Background color
+[X] Background color
 [ ] Font size changes
 [ ] Font family changes
 [ ] Task background and font color different for completed tasks
@@ -41,7 +41,7 @@
 
 [X] Add route from server to router
 [X] GET route to get all store tasks from DB
-[ ] POST route to add new task DB
+[X] POST route to add new task DB
 [ ] PUT route to update a task in DB
 [ ] DELETE route to remove a task from the DB
 

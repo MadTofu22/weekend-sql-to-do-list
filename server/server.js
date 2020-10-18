@@ -10,5 +10,5 @@ console.log('Up and running on port', port);
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-const tasksRouter = require('./modules/task_router');
-app.use('/tasks', tasksRouter);
+const taskRouter = require('./modules/task_router');
+app.use('/tasks', taskRouter);
