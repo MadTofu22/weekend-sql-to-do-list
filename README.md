@@ -5,7 +5,7 @@
 This CRUD project allows the user to add or create tasks and store them to a database.
 
 ## Screen Shot
-![]()
+![Example Image](https://github.com/MadTofu22/weekend-sql-to-do-list/blob/master/Example.png)
 
 ### Prerequisites
 This poject uses the following software:
