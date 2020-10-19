@@ -2,13 +2,13 @@
 
 ## Features:
 
-[ ] Allow the user to create a task.
-- [ ] Update the DOM when a task is created.
-- [ ] Store the task in a database for longer storage.
-[ ] Allow the user to mark a task as completed.
-- [ ] Completed tasks should be visually different from incomplete tasks.
-[ ] Allow the user to delete a task.
-- [ ] Deleting a task should remove it from the database.
+[X] Allow the user to create a task.
+- [X] Update the DOM when a task is created.
+- [X] Store the task in a database for longer storage.
+[X] Allow the user to mark a task as completed.
+- [X] Completed tasks should be visually different from incomplete tasks.
+[X] Allow the user to delete a task.
+- [X] Deleting a task should remove it from the database.
 
 ## Front End:
 
@@ -20,7 +20,7 @@
 - [X] Task State (New | In-progress | Complete | Overdue)
 - [X] Due Date
 [X] Add Task button
-[ ] Task View section
+[X] Task View section
 - [X] Display task name
 - [X] Display task state
 - [X] Display task description
@@ -31,9 +31,9 @@
 ### Styles.css
 
 [X] Background color
-[ ] Font size changes
-[ ] Font family changes
-[ ] Task background and font color different for completed tasks
+[X] Font size changes
+[X] Font family changes
+[X] Task background and font color different for completed tasks
 
 ## Back End:
 
