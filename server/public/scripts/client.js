@@ -8,6 +8,7 @@ function onReady() {
     getTasks();
 
     $('#addTask').on('click', addTask);
+    $('#tasks').on('click', '.deleteButton', deleteTask);
 }
 
 // This function handles the click event for adding a task to the DB
@@ -199,4 +200,21 @@ function makeDueString (status, date, id) {
             </div>`;
     }
     return htmlString;
+}
+
+// This function handles the delete button handler
+function deleteTask () {
+    console.log('hello from deleteTask(), id:', $(this).data('id'));
+    let id = $(this).data('id');
+
+    $.ajax({
+        method: `DELETE`,
+        url: `tasks/${id}`
+    }).then(response => {
+        console.log('response from /tasks DELETE', response);
+        $('#tasks').empty();
+        getTasks();
+    }).catch(error => {
+        alert('error in deleteTask', error);
+    });
 }
