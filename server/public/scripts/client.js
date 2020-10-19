@@ -4,6 +4,9 @@ $(onReady);
 function onReady() {
     console.log('jquery.js has loaded');
 
+    // Initial task display from DB
+    getTasks();
+
     $('#addTask').on('click', addTask);
 }
 
@@ -73,4 +76,127 @@ function validateInput (inputArray) {
     if (numOfPasses === inputArray.length) {
         return true;
     }
+}
+
+// This function gets the tasks stored on the DB then passes them to displayTasks.
+function getTasks () {
+    console.log('hello from getTasks()');
+
+    $.ajax({
+        method: 'GET',
+        url: '/tasks'
+    }).then(response => {
+        console.log('response from /tasks GET:', response);
+        displayTasks(response);
+    }).catch(error => {
+        alert(error);
+    });
+}
+
+// This function formats the tasks from the DB and displays them to DOM
+function displayTasks (taskArray) {
+    console.log('hello from displayTasks(), taskArray:', taskArray);
+
+    // Iterate through the array and form each html string then add it to the DOM
+    for (let task of taskArray) {
+        let nameString = `<h3>${task.name}</h3>`;
+        let descriptionString = `<div class="descriptionContainer"><p>${task.description}</p></div>`;
+        let statusString = makeStatusString(task.status, task.id);
+        let dueString = makeDueString(task.status, task.due, task.id);
+        let htmlString = `
+            <section class="taskContainer" id="task_${task.id}" data-id="${task.id}"> 
+                ${nameString}
+                ${dueString}
+                ${statusString}
+                ${descriptionString}
+            </section>`;
+        $('#tasks').append(htmlString);
+    }
+}
+
+// This function creates and returns the HTML string for the task status.
+function makeStatusString (status, id) {
+    console.log('hello from makeStatusString(), status:', status);
+    let htmlString = ``;
+
+    // Check if the status is complete or not to determine what gets displayed
+    if (status == 'Completed') {
+        htmlString = `
+            <div class="statusContainer">
+                <p>!!!${status}!!!</p><br>
+                <button class="deleteButton" data-id="${id}">Delete</button>
+            </div>`;
+    } else {
+        let options = makeOptionsString(status);
+        htmlString = `
+        <div class="statusContainer">
+            <p>Current Status: ${status}</p><br>
+            <label for="statusUpdate"></label>
+            <select name="statusUpdate" class="inputField" id="statusUpdate_${id}">
+                ${options}
+            </select>
+            <button class="statusUpdateButton" data-id="${id}">Update</button>
+        </div>`;
+    }
+    return htmlString;
+}
+
+// This function creates and returns the html string for the options in the status update drop down
+function makeOptionsString (status) {
+    console.log('hello from makeOptionsString(), status:', status);
+    let htmlString = ``;
+
+    switch(status){
+        case 'New':
+            htmlString = `
+                <option value="In-progress">In-progress</option>
+                <option value="Complete">Complete</option>
+                `;
+            break;
+
+        case 'In-progress':
+            htmlString = `
+                <option value="New">New</option>
+                <option value="Complete">Complete</option>
+                `;
+            break;
+        
+        default:
+            htmlString = `
+                <option value="New">New</option>
+                <option value="In-progress">In-progress</option>
+                <option value="Complete">Complete</option>
+                `;
+                break;
+    }
+    return htmlString;
+}
+
+// This function creates and returns the html string for a due date
+function makeDueString (status, date, id) {
+    console.log('hello from makeDueString(), status:', status, '; date:', date);
+
+    let htmlString = ``;
+    if (date) {
+        if (status == 'Completed') {
+            htmlString = `
+            <div class="dueContainer">
+                <p>Completed before or on: ${date.slice(0, 10)}</p>
+            </div>`;
+        } else {
+            htmlString = `
+            <div class="dueContainer">
+            <p>Due on: <br> ${date.slice(0, 10)}</p>
+            </div>`;
+        }
+    } else {
+        htmlString = `
+            <div class="dueContainer">
+                <p>Due Date Not Set</p>
+                <label for="dueUpdate_${id}">Update:</label>
+                <input type="date" name="dueUpdate" id="dueUpdate_${id}" class="inputField">
+                <button class="dueUpdateButton" data-id="${id}">Update</button>
+            </div>`;
+    }
+    return htmlString;
 }

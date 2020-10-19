@@ -21,10 +21,10 @@
 - [X] Due Date
 [X] Add Task button
 [ ] Task View section
-- [ ] Display task name
-- [ ] Display task state
-- [ ] Display task description
-- [ ] Display task due date
+- [X] Display task name
+- [X] Display task state
+- [X] Display task description
+- [X] Display task due date
 - [ ] Button to mark completed (if not completed)
 - [ ] Button to delete task (if completed)
 
