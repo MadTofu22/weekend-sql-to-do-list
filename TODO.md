@@ -25,8 +25,8 @@
 - [X] Display task state
 - [X] Display task description
 - [X] Display task due date
-- [ ] Button to mark completed (if not completed)
-- [ ] Button to delete task (if completed)
+- [X] Button to mark completed (if not completed)
+- [X] Button to delete task (if completed)
 
 ### Styles.css
 
@@ -42,9 +42,9 @@
 [X] Add route from server to router
 [X] GET route to get all store tasks from DB
 [X] POST route to add new task DB
-[ ] PUT route to update a task in DB
-[ ] DELETE route to remove a task from the DB
+[X] PUT route to update a task in DB
+[X] DELETE route to remove a task from the DB
 
 ### Database
 
-[ ] Create the table
+[X] Create the table

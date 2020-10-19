@@ -7,8 +7,11 @@ function onReady() {
     // Initial task display from DB
     getTasks();
 
+    // Event handlers
     $('#addTask').on('click', addTask);
     $('#tasks').on('click', '.deleteButton', deleteTask);
+    $('#tasks').on('click', '.dueUpdateButton', updateTaskDate);
+    $('#tasks').on('click', '.statusUpdateButton', updateTaskStatus);
 }
 
 // This function handles the click event for adding a task to the DB
@@ -216,5 +219,49 @@ function deleteTask () {
         getTasks();
     }).catch(error => {
         alert('error in deleteTask', error);
+    });
+}
+
+// This function handles event for a status update
+function updateTaskStatus () {
+    console.log('hello from updateTaskStatus()');
+
+    let id = $(this).data('id');
+    let newStatus = $(`#statusUpdate_${id}`).val();
+
+    $.ajax({
+        method: `PUT`,
+        url: `/tasks/status/${id}`,
+        data: {
+            newInfo: newStatus
+        }
+    }).then(response => {
+        console.log('response from /tasks PUT', response);
+        $('#tasks').empty();
+        getTasks();
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+// This function handles event for a status update
+function updateTaskDate () {
+    console.log('hello from updateTaskDate()');
+
+    let id = $(this).data('id');
+    let newDate = $(`#dueUpdate_${id}`).val();
+
+    $.ajax({
+        method: `PUT`,
+        url: `/tasks/due/${id}`,
+        data: {
+            newInfo: newDate
+        }
+    }).then(response => {
+        console.log('response from /tasks PUT', response);
+        $('#tasks').empty();
+        getTasks();
+    }).catch(error => {
+        console.log(error);
     });
 }

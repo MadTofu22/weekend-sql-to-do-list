@@ -6,7 +6,7 @@ const pool = require('./pool');
 taskRouter.get('/', (req, res) => {
     console.log('hello from /tasks GET');
 
-    let queryText = `SELECT * FROM "tasks";`;
+    let queryText = `SELECT * FROM "tasks" ORDER BY "id";`;
 
     pool.query(queryText).then(result => {
         console.log('result from /tasks GET', result.rows);
@@ -57,10 +57,37 @@ taskRouter.post('/', (req, res) => {
 });
 
 // Route to allow the client to update the status of a task in the DB
-taskRouter.put('/:id', (req, res) => {
+taskRouter.put('/status/:id', (req, res) => {
     console.log('hello from /tasks PUT');
 
+    let id = req.params.id;
+    let info = req.body.newInfo;
+    let queryText = `UPDATE "tasks" SET "status" = $1 WHERE "id" = $2;`;
 
+    pool.query(queryText, [info, id]).then(result => {
+        console.log('result from /tasks PUT', result);
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in /tasks PUT', error);
+        res.sendStatus(500);
+    });
+});
+
+// Route to allow the client to update the due date of a task in the DB
+taskRouter.put('/due/:id', (req, res) => {
+    console.log('hello from /tasks PUT');
+
+    let id = req.params.id;
+    let info = req.body.newInfo;
+    let queryText = `UPDATE "tasks" SET "due" = $1 WHERE "id" = $2;`;
+
+    pool.query(queryText, [info, id]).then(result => {
+        console.log('result from /tasks PUT', result);
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in /tasks PUT', error);
+        res.sendStatus(500);
+    });
 });
 
 // Route to allow the client to delete a task from the DB
