@@ -104,7 +104,7 @@ function displayTasks (taskArray) {
     // Iterate through the array and form each html string then add it to the DOM
     for (let task of taskArray) {
         let nameString = `<h3>${task.name}</h3>`;
-        let descriptionString = `<div class="descriptionContainer"><p>${task.description}</p></div>`;
+        let descriptionString = makeDescriptionString(task.description, task.id);
         let statusString = makeStatusString(task.status, task.id);
         let dueString = makeDueString(task.status, task.due, task.id);
         let htmlString = `
@@ -116,6 +116,21 @@ function displayTasks (taskArray) {
             </section>`;
         $('#tasks').append(htmlString);
     }
+    updateTaskDisplay(taskArray);
+}
+
+// This function makes the description string and returns it
+function makeDescriptionString (description, id) {
+    console.log('hello from makeDescriptionString() description:', description, '; id:', id);
+
+    let htmlString = ``;
+
+    if (description == null) {
+        htmlString = `<div class="descriptionContainer"><p>No description added.</p></div>`;
+    } else {
+        htmlString = `<div class="descriptionContainer"><p>${description}</p></div>`;
+    }
+    return htmlString;
 }
 
 // This function creates and returns the HTML string for the task status.
@@ -154,14 +169,14 @@ function makeOptionsString (status) {
         case 'New':
             htmlString = `
                 <option value="In-progress">In-progress</option>
-                <option value="Complete">Complete</option>
+                <option value="Completed">Completed</option>
                 `;
             break;
 
         case 'In-progress':
             htmlString = `
                 <option value="New">New</option>
-                <option value="Complete">Complete</option>
+                <option value="Completed">Completed</option>
                 `;
             break;
         
@@ -169,7 +184,7 @@ function makeOptionsString (status) {
             htmlString = `
                 <option value="New">New</option>
                 <option value="In-progress">In-progress</option>
-                <option value="Complete">Complete</option>
+                <option value="Completed">Completed</option>
                 `;
                 break;
     }
@@ -264,4 +279,21 @@ function updateTaskDate () {
     }).catch(error => {
         console.log(error);
     });
+}
+
+// This function updates the display of tasks if they are completed
+function updateTaskDisplay (taskArray) {
+    console.log('hello from updateTaskDisplay()');
+    console.log('taskArray', taskArray);
+    for (let task of taskArray) {
+        console.log('');
+        let id = task.id;
+        if (task.status == 'Completed') {
+            $(`#task_${id}`).removeClass();
+            $(`#task_${id}`).addClass('completedTaskContainer');
+        } else if (task.status == 'Over Due') {
+            $(`#task_${id}`).removeClass();
+            $(`#task_${id}`).addClass('overdueTaskContainer');
+        }
+    }
 }
