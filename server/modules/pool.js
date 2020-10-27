@@ -5,7 +5,7 @@ const Pool = pg.Pool;
 const pool = new Pool ({
     database: 't2w3_challenge', 
     host: 'localhost', 
-    port: process.env.PORT || 5432, 
+    port: 5432, 
     max: 10, 
     idleTimeoutMillis: 30000 
 });
