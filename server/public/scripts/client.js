@@ -40,6 +40,7 @@ function addTask () {
         }).then(response => {
             console.log('response from addTask() POST');
             $('.inputFields').val('');
+            getTasks();
         }).catch(error => {
             alert(error);
         });
